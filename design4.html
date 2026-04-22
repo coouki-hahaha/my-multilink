@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>04 — Aurora Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+
+    body{
+      font-family:'Noto Sans KR',sans-serif;
+      min-height:100vh;
+      background:#0D1117;
+      display:flex;justify-content:center;
+      padding:48px 20px 80px;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* Animated aurora blobs */
+    .blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;animation:drift 8s ease-in-out infinite alternate;pointer-events:none}
+    .b1{width:340px;height:340px;background:#7B2FBE;top:-80px;left:-60px;animation-delay:0s}
+    .b2{width:300px;height:300px;background:#0EA5E9;bottom:-60px;right:-40px;animation-delay:-3s}
+    .b3{width:220px;height:220px;background:#EC4899;top:40%;left:30%;animation-delay:-5s}
+    @keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,20px) scale(1.1)}}
+
+    .container{width:100%;max-width:400px;display:flex;flex-direction:column;gap:14px;position:relative;z-index:1}
+
+    /* Glass base */
+    .glass{background:rgba(255,255,255,.07);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.14);border-radius:20px}
+
+    /* Profile */
+    .profile{padding:36px 28px 30px;text-align:center}
+    .avatar{width:84px;height:84px;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.06em}
+    .name{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:600;color:#FFF;letter-spacing:-.01em;margin-bottom:10px;text-shadow:0 2px 20px rgba(180,100,240,.5)}
+    .bio{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.9;letter-spacing:.04em}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+    .tag{font-size:9px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);letter-spacing:.06em}
+
+    /* Kakao */
+    .kakao{display:flex;align-items:center;gap:14px;padding:20px 22px;background:#FEE500;border-radius:20px;border:none;box-shadow:0 8px 40px rgba(254,229,0,.4);transition:transform .2s,box-shadow .2s}
+    .kakao:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(254,229,0,.55)}
+    .kakao svg{width:24px;height:24px;flex-shrink:0}
+    .kakao-body{flex:1}
+    .kakao-eye{font-size:9px;color:#1A1200;opacity:.5;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+    .kakao-ttl{font-size:14.5px;font-weight:500;color:#1A1200}
+    .kakao-arr{color:#1A1200;opacity:.3;font-size:16px;margin-left:auto}
+
+    /* Resource */
+    .resource{display:flex;align-items:center;gap:16px;padding:20px 22px;transition:transform .2s}
+    .resource:hover{transform:translateY(-2px)}
+    .res-icon{width:44px;height:44px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .res-eye{font-size:9px;color:rgba(180,140,255,.8);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+    .res-ttl{font-size:13px;color:rgba(255,255,255,.75);line-height:1.5}
+    .res-arr{color:rgba(255,255,255,.2);font-size:14px;margin-left:auto}
+
+    /* Links */
+    .links-eye{font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:10px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 12px;transition:transform .2s}
+    .card:hover{transform:translateY(-3px)}
+    .card-icon{font-size:22px}
+    .card-lbl{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.04em}
+
+    .footer{text-align:center;padding-top:20px;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:.08em}
+  </style>
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <div class="container">
+    <div class="profile glass">
+      <div class="avatar">[사진]</div>
+      <h1 class="name">유니원장</h1>
+      <p class="bio">간호사 출신 뷰티 전문가<br>얼굴비대칭 · 두피모발 · 이어&워터테라피</p>
+      <div class="tags">
+        <span class="tag">얼굴비대칭</span><span class="tag">두피모발</span><span class="tag">이어테라피</span>
+      </div>
+    </div>
+
+    <a href="[카카오톡 채널 URL]" class="kakao">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.686 2 11.2c0 2.88 1.74 5.41 4.38 6.97l-.99 3.63a.3.3 0 0 0 .45.33l4.41-2.91c.57.07 1.15.1 1.75.1 5.523 0 10-3.686 10-8.2C22 6.686 17.523 3 12 3Z" fill="#1A1200"/></svg>
+      <div class="kakao-body"><div class="kakao-eye">무료 상담 · 예약 문의</div><div class="kakao-ttl">카카오톡 채널로 연결하기</div></div>
+      <span class="kakao-arr">→</span>
+    </a>
+
+    <a href="[무료 자료 URL]" class="resource glass">
+      <div class="res-icon">📋</div>
+      <div style="flex:1"><div class="res-eye">Free Download</div><div class="res-ttl">[무료 자료 제목]<br>지금 바로 받아보세요</div></div>
+      <span class="res-arr">→</span>
+    </a>
+
+    <div>
+      <p class="links-eye">더 알아보기</p>
+      <div class="grid">
+        <a href="[블로그 URL]" class="card glass"><span class="card-icon">✍️</span><span class="card-lbl">블로그</span></a>
+        <a href="[인스타그램 URL]" class="card glass"><span class="card-icon">📷</span><span class="card-lbl">인스타그램</span></a>
+        <a href="[유튜브 URL]" class="card glass"><span class="card-icon">▶️</span><span class="card-lbl">유튜브</span></a>
+        <a href="[후기 URL]" class="card glass"><span class="card-icon">⭐</span><span class="card-lbl">고객 후기</span></a>
+      </div>
+    </div>
+    <div class="footer">© 2026 유니원장</div>
+  </div>
+</body></html>

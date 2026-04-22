@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>07 — Split Screen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+    body{font-family:'Noto Sans KR',sans-serif;min-height:100vh;background:#1C1C1C;display:flex;justify-content:center;align-items:flex-start}
+
+    .page{width:100%;max-width:420px;min-height:100vh;display:flex;flex-direction:column}
+
+    /* ── Split hero ── */
+    .hero{display:grid;grid-template-columns:1fr 1fr;min-height:280px}
+    .hero-left{background:#1C1C1C;padding:32px 20px 32px 24px;display:flex;flex-direction:column;justify-content:flex-end}
+    .hero-right{background:#F5F2ED;padding:32px 24px 32px 20px;display:flex;flex-direction:column;justify-content:flex-end}
+    .h-eye{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+    .hero-left .h-eye{color:rgba(255,255,255,.3)}
+    .hero-right .h-eye{color:#999}
+    .h-name{font-family:'Noto Serif KR',serif;font-size:28px;font-weight:600;line-height:1.1;letter-spacing:-.01em}
+    .hero-left .h-name{color:#FFF}
+    .hero-right .h-name{color:#1C1C1C;font-style:italic;font-weight:400;font-size:22px}
+    .avatar{width:52px;height:52px;border-radius:50%;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:.06em}
+    .hero-left .avatar{background:#333;color:#666;border:1px solid #444}
+    .hero-right .avatar{background:#E0DDD7;color:#AAA;border:1px solid #D0CDC8}
+
+    /* divider */
+    .split-rule{height:2px;background:linear-gradient(90deg,#1C1C1C 50%,#F5F2ED 50%)}
+
+    /* Content */
+    .content{background:#F5F2ED;flex:1;padding:24px}
+    .c-bio{font-size:11.5px;font-weight:300;color:#777;line-height:1.9;letter-spacing:.04em;margin-bottom:24px;border-left:2px solid #1C1C1C;padding-left:14px}
+
+    /* Kakao */
+    .kakao{display:flex;align-items:center;gap:12px;padding:18px 20px;background:#FEE500;margin-bottom:10px;transition:transform .15s}
+    .kakao:hover{transform:translateX(4px)}
+    .kakao svg{width:22px;height:22px;flex-shrink:0}
+    .kakao-body{flex:1}
+    .kakao-eye{font-size:8px;color:#1A1200;opacity:.5;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+    .kakao-ttl{font-size:13.5px;font-weight:500;color:#1A1200}
+    .kakao-arr{font-size:16px;color:#1A1200;opacity:.3}
+
+    /* Resource */
+    .resource{display:flex;align-items:center;gap:12px;padding:16px 20px;background:#1C1C1C;color:#F5F2ED;margin-bottom:20px;transition:opacity .2s}
+    .resource:hover{opacity:.85}
+    .res-icon{font-size:18px;flex-shrink:0}
+    .res-body{flex:1}
+    .res-eye{font-size:8px;color:rgba(245,242,237,.35);letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+    .res-ttl{font-size:12.5px;font-weight:300;color:#F5F2ED;line-height:1.5}
+    .res-arr{font-size:14px;color:rgba(245,242,237,.2)}
+
+    /* Links */
+    .links-head{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:#BBB;margin-bottom:12px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .card{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#EEEAE4;transition:background .15s}
+    .card:hover{background:#E4E0D8}
+    .card-icon{font-size:16px;flex-shrink:0}
+    .card-lbl{font-size:11.5px;font-weight:300;color:#555;letter-spacing:.04em}
+
+    .footer{background:#F5F2ED;text-align:center;padding:16px;font-size:9px;color:#CCC;letter-spacing:.08em;border-top:1px solid #E8E4DE}
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="avatar">[사진]</div>
+      <div class="h-eye">Beauty Expert</div>
+      <div class="h-name">유니<br>원장</div>
+    </div>
+    <div class="hero-right">
+      <div class="avatar">&nbsp;</div>
+      <div class="h-eye">간호사 출신</div>
+      <div class="h-name">얼굴비대칭<br>케어 전문</div>
+    </div>
+  </div>
+  <div class="split-rule"></div>
+
+  <div class="content">
+    <p class="c-bio">간호사 출신 뷰티 전문가<br>얼굴비대칭 · 두피모발 · 이어&워터테라피</p>
+
+    <a href="[카카오톡 채널 URL]" class="kakao">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.686 2 11.2c0 2.88 1.74 5.41 4.38 6.97l-.99 3.63a.3.3 0 0 0 .45.33l4.41-2.91c.57.07 1.15.1 1.75.1 5.523 0 10-3.686 10-8.2C22 6.686 17.523 3 12 3Z" fill="#1A1200"/></svg>
+      <div class="kakao-body"><div class="kakao-eye">무료 상담 · 예약 문의</div><div class="kakao-ttl">카카오톡 채널로 연결하기</div></div>
+      <span class="kakao-arr">→</span>
+    </a>
+
+    <a href="[무료 자료 URL]" class="resource">
+      <span class="res-icon">📋</span>
+      <div class="res-body"><div class="res-eye">Free Download</div><div class="res-ttl">[무료 자료 제목]<br>지금 바로 받아보세요</div></div>
+      <span class="res-arr">→</span>
+    </a>
+
+    <div class="links-head">더 알아보기</div>
+    <div class="grid">
+      <a href="[블로그 URL]" class="card"><span class="card-icon">✍️</span><span class="card-lbl">블로그</span></a>
+      <a href="[인스타그램 URL]" class="card"><span class="card-icon">📷</span><span class="card-lbl">인스타그램</span></a>
+      <a href="[유튜브 URL]" class="card"><span class="card-icon">▶️</span><span class="card-lbl">유튜브</span></a>
+      <a href="[후기 URL]" class="card"><span class="card-icon">⭐</span><span class="card-lbl">고객 후기</span></a>
+    </div>
+  </div>
+  <div class="footer">© 2026 유니원장</div>
+</div>
+</body></html>

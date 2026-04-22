@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>01 — Brutalist Grid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+    body{font-family:'Space Grotesk',sans-serif;background:#F2F0EB;color:#0A0A0A;min-height:100vh;padding:0}
+
+    /* ── Header bar ── */
+    .topbar{background:#0A0A0A;color:#F2F0EB;padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
+    .topbar-l{font-size:9px;letter-spacing:.22em;text-transform:uppercase;opacity:.5}
+    .topbar-r{font-size:9px;letter-spacing:.12em;opacity:.5}
+
+    /* ── Profile block ── */
+    .profile{border-bottom:3px solid #0A0A0A;display:grid;grid-template-columns:auto 1fr;gap:0}
+    .avatar-col{border-right:3px solid #0A0A0A;padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:10px}
+    .avatar{width:72px;height:72px;border:3px solid #0A0A0A;background:#E0DDD8;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:.06em;color:#888}
+    .avatar-num{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#888}
+    .bio-col{padding:24px 20px}
+    .section-tag{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:10px}
+    .name{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
+    .bio{font-size:11px;font-family:'Noto Sans KR',sans-serif;font-weight:400;color:#555;line-height:1.8;letter-spacing:.02em}
+
+    /* ── Sections ── */
+    .section-label{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#888;padding:8px 20px;border-bottom:1px solid #D0CCC6}
+
+    /* ── Kakao ── */
+    .kakao{display:flex;align-items:center;gap:0;border-bottom:3px solid #0A0A0A;background:#FEE500;transition:background .15s}
+    .kakao:hover{background:#FFD700}
+    .kakao-num{font-size:36px;font-weight:700;color:rgba(0,0,0,.08);padding:20px 16px;line-height:1;border-right:2px solid rgba(0,0,0,.12);flex-shrink:0}
+    .kakao-body{padding:18px 18px;flex:1}
+    .kakao-eye{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#1A1200;opacity:.5;margin-bottom:5px}
+    .kakao-ttl{font-size:15px;font-weight:700;color:#1A1200;letter-spacing:-.01em}
+    .kakao-arr{padding:0 18px;font-size:22px;color:#1A1200;opacity:.25}
+
+    /* ── Resource ── */
+    .resource{display:flex;align-items:center;gap:0;border-bottom:3px solid #0A0A0A;transition:background .15s}
+    .resource:hover{background:#EEEAE4}
+    .resource-num{font-size:36px;font-weight:700;color:rgba(0,0,0,.06);padding:20px 16px;line-height:1;border-right:2px solid #D0CCC6;flex-shrink:0}
+    .resource-body{padding:18px;flex:1}
+    .res-eye{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:5px}
+    .res-ttl{font-size:13px;font-weight:500;color:#0A0A0A;line-height:1.5}
+    .res-arr{padding:0 18px;font-size:20px;color:#CCC}
+
+    /* ── Link grid ── */
+    .links-grid{display:grid;grid-template-columns:1fr 1fr}
+    .link-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:20px;border:1px solid #D0CCC6;border-top:none;border-left:none;min-height:90px;position:relative;transition:background .15s}
+    .link-card:hover{background:#EEEAE4}
+    .link-card:nth-child(odd){border-left:3px solid #0A0A0A}
+    .link-card:nth-child(1),.link-card:nth-child(2){border-top:3px solid #0A0A0A}
+    .lc-num{position:absolute;top:10px;right:12px;font-size:28px;font-weight:700;color:rgba(0,0,0,.05);line-height:1}
+    .lc-icon{font-size:18px;margin-bottom:4px}
+    .lc-lbl{font-size:11px;font-weight:500;letter-spacing:.04em;color:#333}
+
+    .footer{padding:12px 20px;font-size:9px;color:#AAA;letter-spacing:.1em;text-transform:uppercase;border-top:1px solid #D0CCC6}
+  </style>
+</head>
+<body>
+  <div class="topbar"><span class="topbar-l">Uni Beauty · Multilink</span><span class="topbar-r">2026</span></div>
+
+  <div class="profile">
+    <div class="avatar-col">
+      <div class="avatar">[사진]</div>
+      <div class="avatar-num">No.01</div>
+    </div>
+    <div class="bio-col">
+      <div class="section-tag">Profile</div>
+      <h1 class="name">유니원장</h1>
+      <p class="bio">간호사 출신<br>뷰티 전문가<br>얼굴비대칭케어</p>
+    </div>
+  </div>
+
+  <a href="[카카오톡 채널 URL]" class="kakao">
+    <div class="kakao-num">02</div>
+    <div class="kakao-body">
+      <div class="kakao-eye">무료 상담 · 예약 문의</div>
+      <div class="kakao-ttl">카카오톡 채널로 연결하기</div>
+    </div>
+    <div class="kakao-arr">→</div>
+  </a>
+
+  <a href="[무료 자료 URL]" class="resource">
+    <div class="resource-num">03</div>
+    <div class="resource-body">
+      <div class="res-eye">Free Download</div>
+      <div class="res-ttl">[무료 자료 제목]<br>지금 바로 받아보세요</div>
+    </div>
+    <div class="res-arr">→</div>
+  </a>
+
+  <div class="links-grid">
+    <a href="[블로그 URL]" class="link-card"><div class="lc-num">01</div><span class="lc-icon">✍️</span><span class="lc-lbl">블로그</span></a>
+    <a href="[인스타그램 URL]" class="link-card"><div class="lc-num">02</div><span class="lc-icon">📷</span><span class="lc-lbl">인스타그램</span></a>
+    <a href="[유튜브 URL]" class="link-card"><div class="lc-num">03</div><span class="lc-icon">▶️</span><span class="lc-lbl">유튜브</span></a>
+    <a href="[후기 URL]" class="link-card"><div class="lc-num">04</div><span class="lc-icon">⭐</span><span class="lc-lbl">고객 후기</span></a>
+  </div>
+
+  <div class="footer">© 2026 유니원장</div>
+</body></html>

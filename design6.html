@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>06 — Retro Print</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+    body{
+      font-family:'IBM Plex Mono',monospace;
+      background:#F5F0E6;
+      color:#1A1410;
+      min-height:100vh;
+      padding:32px 24px 80px;
+      background-image:
+        radial-gradient(circle,rgba(0,0,0,.015) 1px,transparent 1px);
+      background-size:20px 20px;
+    }
+    .container{max-width:420px;margin:0 auto}
+
+    /* Masthead */
+    .masthead{border-top:3px solid #1A1410;border-bottom:1px solid #1A1410;padding:8px 0;display:flex;justify-content:space-between;align-items:center;margin-bottom:0}
+    .mh-l{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#666}
+    .mh-r{font-size:8px;letter-spacing:.1em;color:#666}
+
+    /* Profile — newspaper column */
+    .profile{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid #1A1410;margin-bottom:0}
+    .profile-left{padding:20px 16px 20px 0;border-right:1px solid #C0BAB0}
+    .avatar{width:100%;aspect-ratio:1;background:#E0D8CC;border:1px solid #C0BAB0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#AAA;letter-spacing:.06em;margin-bottom:10px}
+    .avatar-caption{font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:#999;text-align:center}
+    .profile-right{padding:20px 0 20px 16px}
+    .edition{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:#999;margin-bottom:12px}
+    .name{font-size:22px;font-weight:700;line-height:1.1;letter-spacing:-.01em;margin-bottom:10px}
+    .bio{font-size:10px;line-height:1.8;color:#555;font-style:italic}
+
+    /* Highlight bar */
+    .highlight{background:#1A1410;color:#F5F0E6;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:opacity .2s}
+    .highlight:hover{opacity:.85}
+    .hl-badge{font-size:8px;letter-spacing:.14em;text-transform:uppercase;background:#FEE500;color:#1A1410;padding:3px 8px;flex-shrink:0}
+    .hl-svg{width:18px;height:18px;flex-shrink:0}
+    .hl-body{flex:1}
+    .hl-eye{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,230,.45);margin-bottom:3px}
+    .hl-ttl{font-size:12px;font-weight:500;letter-spacing:.02em}
+    .hl-arr{color:rgba(245,240,230,.3);font-size:14px}
+
+    /* Resource */
+    .resource{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid #C0BAB0;transition:opacity .2s}
+    .resource:hover{opacity:.7}
+    .res-col1{font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:#999;writing-mode:vertical-rl;text-orientation:mixed;padding-top:2px;flex-shrink:0}
+    .res-body{flex:1}
+    .res-ttl{font-size:12px;font-weight:500;line-height:1.5;margin-bottom:4px}
+    .res-sub{font-size:9px;color:#888;font-style:italic}
+    .res-arr{font-size:13px;color:#C0BAB0;margin-top:2px}
+
+    /* Links — 4-col grid */
+    .links-head{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:#999;padding:14px 0 10px;border-top:1px solid #C0BAB0;margin-top:0}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #C0BAB0;border-right:none;border-bottom:none}
+    .card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-right:1px solid #C0BAB0;border-bottom:1px solid #C0BAB0;transition:background .15s}
+    .card:hover{background:#EDE8D8}
+    .card-icon{font-size:16px}
+    .card-lbl{font-size:8.5px;letter-spacing:.06em;color:#666;text-align:center}
+
+    .footer{padding-top:14px;font-size:8px;color:#BBB;letter-spacing:.1em;text-align:center;border-top:1px solid #C0BAB0}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="masthead">
+    <span class="mh-l">유니원장 · Beauty Studio</span>
+    <span class="mh-r">Vol. 2026</span>
+  </div>
+
+  <div class="profile">
+    <div class="profile-left">
+      <div class="avatar">[사진]</div>
+      <div class="avatar-caption">유니원장</div>
+    </div>
+    <div class="profile-right">
+      <div class="edition">Beauty Expert</div>
+      <h1 class="name">얼굴<br>비대칭<br>케어</h1>
+      <p class="bio">간호사 출신<br>뷰티 전문가<br>두피모발 · 이어&워터</p>
+    </div>
+  </div>
+
+  <a href="[카카오톡 채널 URL]" class="highlight">
+    <span class="hl-badge">CTA</span>
+    <svg class="hl-svg" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.686 2 11.2c0 2.88 1.74 5.41 4.38 6.97l-.99 3.63a.3.3 0 0 0 .45.33l4.41-2.91c.57.07 1.15.1 1.75.1 5.523 0 10-3.686 10-8.2C22 6.686 17.523 3 12 3Z" fill="#FEE500"/></svg>
+    <div class="hl-body"><div class="hl-eye">무료 상담 · 예약 문의</div><div class="hl-ttl">카카오톡 채널로 연결하기</div></div>
+    <span class="hl-arr">→</span>
+  </a>
+
+  <a href="[무료 자료 URL]" class="resource">
+    <div class="res-col1">Free DL</div>
+    <div class="res-body">
+      <div class="res-ttl">[무료 자료 제목]</div>
+      <div class="res-sub">지금 바로 받아보세요</div>
+    </div>
+    <span class="res-arr">→</span>
+  </a>
+
+  <div class="links-head">더 알아보기</div>
+  <div class="grid">
+    <a href="[블로그 URL]" class="card"><span class="card-icon">✍️</span><span class="card-lbl">블로그</span></a>
+    <a href="[인스타그램 URL]" class="card"><span class="card-icon">📷</span><span class="card-lbl">인스타</span></a>
+    <a href="[유튜브 URL]" class="card"><span class="card-icon">▶️</span><span class="card-lbl">유튜브</span></a>
+    <a href="[후기 URL]" class="card"><span class="card-icon">⭐</span><span class="card-lbl">후기</span></a>
+  </div>
+
+  <div class="footer">© 2026 유니원장 · All rights reserved</div>
+</div>
+</body></html>

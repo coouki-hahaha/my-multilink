@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>02 — Japanese Zen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+    body{font-family:'Noto Sans KR',sans-serif;background:#FAFAF8;color:#1A1A18;min-height:100vh;padding:64px 32px 80px;font-weight:200}
+
+    .container{max-width:360px;margin:0 auto}
+
+    /* Profile */
+    .profile{margin-bottom:52px;display:flex;gap:24px;align-items:flex-start}
+    .avatar{width:56px;height:56px;border-radius:50%;background:#E8E8E4;flex-shrink:0;margin-top:4px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#AAA;letter-spacing:.06em}
+    .profile-text{}
+    .name-jp{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#B0ADA8;margin-bottom:8px}
+    .name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:400;letter-spacing:.04em;margin-bottom:10px}
+    .bio{font-size:10.5px;font-weight:200;color:#888;line-height:2.1;letter-spacing:.06em}
+
+    .divider{height:.5px;background:#E0DED9;margin:0 0 28px}
+
+    /* Kakao */
+    .kakao{display:flex;align-items:center;gap:16px;padding:18px 0;border-top:.5px solid #E0DED9;border-bottom:.5px solid #E0DED9;margin-bottom:10px;transition:opacity .2s}
+    .kakao:hover{opacity:.7}
+    .kakao-dot{width:8px;height:8px;background:#FEE500;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 3px rgba(254,229,0,.25)}
+    .kakao-body{flex:1}
+    .kakao-eye{font-size:8.5px;font-weight:200;color:#AAA;letter-spacing:.14em;margin-bottom:4px}
+    .kakao-ttl{font-size:12.5px;font-weight:300;color:#1A1A18;letter-spacing:.06em}
+    .kakao-arr{font-size:12px;color:#CCC}
+
+    /* Resource */
+    .resource{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:.5px solid #E0DED9;margin-bottom:32px;transition:opacity .2s}
+    .resource:hover{opacity:.7}
+    .res-line{width:2px;height:36px;background:#D0CEC9;flex-shrink:0}
+    .res-body{flex:1}
+    .res-eye{font-size:8.5px;font-weight:200;color:#AAA;letter-spacing:.14em;margin-bottom:4px}
+    .res-ttl{font-size:12.5px;font-weight:300;color:#1A1A18;letter-spacing:.04em;line-height:1.6}
+    .res-arr{font-size:12px;color:#CCC}
+
+    /* Links — vertical list */
+    .links-label{font-size:8.5px;font-weight:200;letter-spacing:.22em;text-transform:uppercase;color:#C0BDB8;margin-bottom:16px}
+    .link-list{display:flex;flex-direction:column;gap:0}
+    .link-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:.5px solid #EDEBE8;transition:opacity .2s}
+    .link-item:hover{opacity:.6}
+    .li-num{font-size:8.5px;color:#D0CEC9;font-weight:300;letter-spacing:.06em;width:18px;flex-shrink:0}
+    .li-icon{font-size:14px;flex-shrink:0}
+    .li-name{font-size:12px;font-weight:300;color:#555;letter-spacing:.06em;flex:1}
+    .li-arr{font-size:11px;color:#D0CEC9}
+
+    .footer{margin-top:40px;font-size:8.5px;color:#D0CEC9;letter-spacing:.14em;text-align:center}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="profile">
+    <div class="avatar">[사진]</div>
+    <div class="profile-text">
+      <div class="name-jp">Uni · Beauty Expert</div>
+      <h1 class="name">유니원장</h1>
+      <p class="bio">간호사 출신 뷰티 전문가<br>얼굴비대칭 · 두피모발<br>이어&워터테라피</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <a href="[카카오톡 채널 URL]" class="kakao">
+    <div class="kakao-dot"></div>
+    <div class="kakao-body">
+      <div class="kakao-eye">무료 상담 · 예약 문의</div>
+      <div class="kakao-ttl">카카오톡 채널로 연결하기</div>
+    </div>
+    <div class="kakao-arr">→</div>
+  </a>
+
+  <a href="[무료 자료 URL]" class="resource">
+    <div class="res-line"></div>
+    <div class="res-body">
+      <div class="res-eye">Free Download</div>
+      <div class="res-ttl">[무료 자료 제목]<br>지금 바로 받아보세요</div>
+    </div>
+    <div class="res-arr">→</div>
+  </a>
+
+  <div class="links-label">더 알아보기</div>
+  <div class="link-list">
+    <a href="[블로그 URL]" class="link-item"><span class="li-num">01</span><span class="li-icon">✍️</span><span class="li-name">블로그</span><span class="li-arr">→</span></a>
+    <a href="[인스타그램 URL]" class="link-item"><span class="li-num">02</span><span class="li-icon">📷</span><span class="li-name">인스타그램</span><span class="li-arr">→</span></a>
+    <a href="[유튜브 URL]" class="link-item"><span class="li-num">03</span><span class="li-icon">▶️</span><span class="li-name">유튜브</span><span class="li-arr">→</span></a>
+    <a href="[후기 URL]" class="link-item"><span class="li-num">04</span><span class="li-icon">⭐</span><span class="li-name">고객 후기</span><span class="li-arr">→</span></a>
+  </div>
+
+  <div class="footer">© 2026 유니원장</div>
+</div>
+</body></html>

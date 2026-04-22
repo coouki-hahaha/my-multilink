@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>08 — Soft 3D Bubble</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+    body{
+      font-family:'Nunito','Noto Sans KR',sans-serif;
+      background:#F0EEFF;
+      color:#2D2055;
+      min-height:100vh;
+      padding:40px 20px 80px;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    /* Background blobs */
+    .bg-blob{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
+    .bg1{width:280px;height:280px;background:radial-gradient(circle,rgba(168,130,255,.4),transparent);top:-60px;right:-60px}
+    .bg2{width:240px;height:240px;background:radial-gradient(circle,rgba(255,165,210,.4),transparent);bottom:60px;left:-40px}
+    .bg3{width:160px;height:160px;background:radial-gradient(circle,rgba(130,200,255,.35),transparent);top:45%;right:10px}
+
+    .container{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:14px;position:relative;z-index:1}
+
+    /* Profile */
+    .profile{background:#FFF;border-radius:28px;padding:32px 24px 28px;text-align:center;box-shadow:0 8px 32px rgba(100,60,200,.12),0 2px 8px rgba(100,60,200,.06)}
+    .avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#C4A8FF,#FF9FD5);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.7);letter-spacing:.06em;box-shadow:0 8px 24px rgba(160,100,255,.3)}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px}
+    .tag{font-size:9.5px;font-weight:600;padding:5px 12px;border-radius:20px;letter-spacing:.02em}
+    .tag-pink{background:#FFE8F4;color:#D0508A}
+    .tag-purple{background:#EDE8FF;color:#7B55CC}
+    .tag-blue{background:#E8F4FF;color:#4480CC}
+    .name{font-size:24px;font-weight:800;letter-spacing:-.02em;color:#2D2055;margin-bottom:8px}
+    .bio{font-size:11.5px;font-weight:300;color:#8878AA;line-height:1.8;letter-spacing:.02em}
+
+    /* Kakao */
+    .kakao{display:flex;align-items:center;gap:14px;padding:20px 22px;background:#FEE500;border-radius:20px;box-shadow:0 8px 24px rgba(254,229,0,.45),0 3px 8px rgba(254,200,0,.2);transition:transform .2s,box-shadow .2s}
+    .kakao:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 16px 36px rgba(254,229,0,.55),0 4px 12px rgba(254,200,0,.3)}
+    .kakao svg{width:24px;height:24px;flex-shrink:0}
+    .kakao-body{flex:1}
+    .kakao-eye{font-size:9px;color:#1A1200;opacity:.5;letter-spacing:.1em;margin-bottom:3px}
+    .kakao-ttl{font-size:14px;font-weight:700;color:#1A1200}
+    .kakao-arr{color:#1A1200;opacity:.3;font-size:18px}
+
+    /* Resource */
+    .resource{display:flex;align-items:center;gap:16px;padding:20px;background:#FFF;border-radius:20px;box-shadow:0 6px 24px rgba(100,60,200,.1),0 2px 6px rgba(100,60,200,.06);transition:transform .2s,box-shadow .2s}
+    .resource:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(100,60,200,.15)}
+    .res-icon{width:48px;height:48px;background:linear-gradient(135deg,#EDE8FF,#FFE8F4);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 12px rgba(160,100,255,.2)}
+    .res-eye{font-size:9px;font-weight:600;color:#C084CC;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+    .res-ttl{font-size:13px;font-weight:500;color:#2D2055;line-height:1.5}
+    .res-arr{color:#C4B8E4;font-size:16px;margin-left:auto}
+
+    /* Links */
+    .links-eye{font-size:9.5px;font-weight:700;color:#B0A0D0;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-bottom:10px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 12px;background:#FFF;border-radius:20px;box-shadow:0 6px 20px rgba(100,60,200,.09),0 2px 6px rgba(100,60,200,.05);transition:transform .2s,box-shadow .2s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(100,60,200,.16)}
+    .card-icon-box{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px}
+    .c1 .card-icon-box{background:linear-gradient(135deg,#FFE8D6,#FFD0B8)}
+    .c2 .card-icon-box{background:linear-gradient(135deg,#FFE8F4,#FFD0E8)}
+    .c3 .card-icon-box{background:linear-gradient(135deg,#FFE8E8,#FFD0D0)}
+    .c4 .card-icon-box{background:linear-gradient(135deg,#FFFBE8,#FFF0B8)}
+    .card-lbl{font-size:11.5px;font-weight:600;color:#7060A0;letter-spacing:.02em}
+
+    .footer{text-align:center;padding-top:20px;font-size:10px;color:#C0B0E0;letter-spacing:.06em;font-weight:400}
+  </style>
+</head>
+<body>
+  <div class="bg-blob bg1"></div>
+  <div class="bg-blob bg2"></div>
+  <div class="bg-blob bg3"></div>
+
+  <div class="container">
+    <div class="profile">
+      <div class="avatar">[사진]</div>
+      <div class="tags">
+        <span class="tag tag-purple">얼굴비대칭</span>
+        <span class="tag tag-pink">두피모발</span>
+        <span class="tag tag-blue">이어테라피</span>
+      </div>
+      <h1 class="name">유니원장</h1>
+      <p class="bio">간호사 출신 뷰티 전문가<br>얼굴비대칭 · 두피모발 · 이어&워터테라피</p>
+    </div>
+
+    <a href="[카카오톡 채널 URL]" class="kakao">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.686 2 11.2c0 2.88 1.74 5.41 4.38 6.97l-.99 3.63a.3.3 0 0 0 .45.33l4.41-2.91c.57.07 1.15.1 1.75.1 5.523 0 10-3.686 10-8.2C22 6.686 17.523 3 12 3Z" fill="#1A1200"/></svg>
+      <div class="kakao-body"><div class="kakao-eye">무료 상담 · 예약 문의</div><div class="kakao-ttl">카카오톡 채널로 연결하기</div></div>
+      <span class="kakao-arr">→</span>
+    </a>
+
+    <a href="[무료 자료 URL]" class="resource">
+      <div class="res-icon">📋</div>
+      <div style="flex:1"><div class="res-eye">Free Download</div><div class="res-ttl">[무료 자료 제목]<br>지금 바로 받아보세요</div></div>
+      <span class="res-arr">→</span>
+    </a>
+
+    <div>
+      <p class="links-eye">더 알아보기</p>
+      <div class="grid">
+        <a href="[블로그 URL]" class="card c1"><div class="card-icon-box">✍️</div><span class="card-lbl">블로그</span></a>
+        <a href="[인스타그램 URL]" class="card c2"><div class="card-icon-box">📷</div><span class="card-lbl">인스타그램</span></a>
+        <a href="[유튜브 URL]" class="card c3"><div class="card-icon-box">▶️</div><span class="card-lbl">유튜브</span></a>
+        <a href="[후기 URL]" class="card c4"><div class="card-icon-box">⭐</div><span class="card-lbl">고객 후기</span></a>
+      </div>
+    </div>
+    <div class="footer">© 2026 유니원장</div>
+  </div>
+</body></html>

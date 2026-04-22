@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>03 — Neon City</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+    body{font-family:'Rajdhani','Noto Sans KR',sans-serif;background:#080812;color:#E8E0F0;min-height:100vh;padding:48px 20px 80px;overflow-x:hidden}
+
+    .container{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+
+    /* Scan line overlay */
+    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:100}
+
+    /* Profile */
+    .profile{position:relative;padding:32px 24px;border:1px solid rgba(255,45,120,.3);background:rgba(255,45,120,.04)}
+    .profile::before{content:'';position:absolute;top:-1px;left:20px;width:40px;height:2px;background:#FF2D78}
+    .profile::after{content:'';position:absolute;bottom:-1px;right:20px;width:40px;height:2px;background:#00F0FF}
+    .neon-tag{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#FF2D78;text-shadow:0 0 8px rgba(255,45,120,.6);margin-bottom:16px}
+    .profile-inner{display:flex;gap:18px;align-items:center}
+    .avatar{width:64px;height:64px;border-radius:4px;border:1px solid rgba(255,45,120,.4);background:#120818;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;color:#FF2D78;letter-spacing:.06em;box-shadow:0 0 12px rgba(255,45,120,.15),inset 0 0 12px rgba(255,45,120,.05)}
+    .name{font-size:26px;font-weight:700;letter-spacing:.04em;line-height:1;margin-bottom:8px;color:#FFF;text-shadow:0 0 20px rgba(255,255,255,.3)}
+    .bio{font-size:11px;font-weight:400;color:rgba(255,255,255,.4);line-height:1.8;letter-spacing:.06em}
+
+    /* Kakao */
+    .kakao{display:flex;align-items:center;gap:14px;padding:18px 22px;background:#FEE500;position:relative;overflow:hidden;transition:box-shadow .2s}
+    .kakao::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 50%)}
+    .kakao:hover{box-shadow:0 0 30px rgba(254,229,0,.5)}
+    .kakao svg{width:22px;height:22px;flex-shrink:0;z-index:1}
+    .kakao-body{flex:1;z-index:1}
+    .kakao-eye{font-size:8px;color:#1A1200;opacity:.5;letter-spacing:.18em;text-transform:uppercase;margin-bottom:3px}
+    .kakao-ttl{font-size:15px;font-weight:600;color:#1A1200;letter-spacing:.02em}
+    .kakao-arr{z-index:1;color:#1A1200;opacity:.3;font-size:18px}
+
+    /* Resource */
+    .resource{display:flex;align-items:center;gap:14px;padding:18px 22px;border:1px solid rgba(0,240,255,.25);background:rgba(0,240,255,.04);position:relative;transition:border-color .2s,box-shadow .2s}
+    .resource::before{content:'';position:absolute;top:-1px;left:20px;width:30px;height:1px;background:#00F0FF}
+    .resource:hover{border-color:rgba(0,240,255,.6);box-shadow:0 0 20px rgba(0,240,255,.1)}
+    .res-icon-box{width:40px;height:40px;border:1px solid rgba(0,240,255,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:rgba(0,240,255,.05)}
+    .res-eye{font-size:8px;color:#00F0FF;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-bottom:4px;text-shadow:0 0 6px rgba(0,240,255,.4)}
+    .res-ttl{font-size:13px;font-weight:500;color:rgba(255,255,255,.7);line-height:1.5}
+    .res-arr{color:rgba(0,240,255,.3);font-size:16px;margin-left:auto}
+
+    /* Links */
+    .links-label{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:8px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);position:relative;transition:border-color .2s,background .2s}
+    .card:hover{border-color:rgba(255,45,120,.4);background:rgba(255,45,120,.05)}
+    .card:hover .card-lbl{color:#FF2D78;text-shadow:0 0 8px rgba(255,45,120,.5)}
+    .card-icon{font-size:20px}
+    .card-lbl{font-size:11px;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:.08em;transition:color .2s,text-shadow .2s}
+
+    .footer{text-align:center;padding-top:24px;font-size:9px;color:rgba(255,255,255,.15);letter-spacing:.14em;text-transform:uppercase}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="profile">
+    <div class="neon-tag">// Beauty Expert</div>
+    <div class="profile-inner">
+      <div class="avatar">[사진]</div>
+      <div>
+        <h1 class="name">유니원장</h1>
+        <p class="bio">간호사 출신 뷰티 전문가<br>얼굴비대칭 · 두피모발</p>
+      </div>
+    </div>
+  </div>
+
+  <a href="[카카오톡 채널 URL]" class="kakao">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.686 2 11.2c0 2.88 1.74 5.41 4.38 6.97l-.99 3.63a.3.3 0 0 0 .45.33l4.41-2.91c.57.07 1.15.1 1.75.1 5.523 0 10-3.686 10-8.2C22 6.686 17.523 3 12 3Z" fill="#1A1200"/></svg>
+    <div class="kakao-body"><div class="kakao-eye">무료 상담 · 예약 문의</div><div class="kakao-ttl">카카오톡 채널로 연결하기</div></div>
+    <span class="kakao-arr">→</span>
+  </a>
+
+  <a href="[무료 자료 URL]" class="resource">
+    <div class="res-icon-box">📋</div>
+    <div style="flex:1"><div class="res-eye">Free Download</div><div class="res-ttl">[무료 자료 제목]<br>지금 바로 받아보세요</div></div>
+    <span class="res-arr">→</span>
+  </a>
+
+  <div>
+    <div class="links-label">// 더 알아보기</div>
+    <div class="grid">
+      <a href="[블로그 URL]" class="card"><span class="card-icon">✍️</span><span class="card-lbl">블로그</span></a>
+      <a href="[인스타그램 URL]" class="card"><span class="card-icon">📷</span><span class="card-lbl">인스타그램</span></a>
+      <a href="[유튜브 URL]" class="card"><span class="card-icon">▶️</span><span class="card-lbl">유튜브</span></a>
+      <a href="[후기 URL]" class="card"><span class="card-icon">⭐</span><span class="card-lbl">고객 후기</span></a>
+    </div>
+  </div>
+  <div class="footer">© 2026 유니원장</div>
+</div>
+</body></html>

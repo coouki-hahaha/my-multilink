@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>디자인 갤러리 — 유니원장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans KR',sans-serif;background:#0E0E0E;color:#E8E4DE;padding:52px 28px 80px;min-height:100vh}
+
+    /* Header */
+    .hd{text-align:center;margin-bottom:52px}
+    .hd-eye{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#444;margin-bottom:14px}
+    .hd-title{font-size:26px;font-weight:300;color:#DDD;letter-spacing:-.01em;margin-bottom:6px}
+    .hd-sub{font-size:12px;color:#555;letter-spacing:.04em}
+    .hd-line{width:48px;height:1px;background:#282828;margin:18px auto 0}
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:28px;
+      max-width:1560px;
+      margin:0 auto;
+    }
+    @media(max-width:1200px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+    /* Card */
+    .card{display:flex;flex-direction:column;gap:12px}
+
+    .label{display:flex;align-items:center;gap:10px}
+    .lbl-num{font-size:10px;color:#383838;font-weight:500;letter-spacing:.06em}
+    .lbl-name{font-size:12px;color:#666;letter-spacing:.03em}
+    .lbl-badge{margin-left:auto;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px}
+
+    /* Iframe shell */
+    .shell{
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid #1E1E1E;
+      background:#111;
+      cursor:pointer;
+      transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+    }
+    .shell:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.7);border-color:#333}
+    .shell:hover .overlay{opacity:1}
+
+    iframe{
+      width:420px;height:900px;
+      border:none;
+      transform-origin:top left;
+      display:block;
+      pointer-events:none;
+    }
+
+    /* Hover overlay */
+    .overlay{
+      position:absolute;inset:0;
+      background:rgba(0,0,0,.5);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+      opacity:0;transition:opacity .25s;
+    }
+    .open-btn{
+      font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+      color:#FFF;border:1px solid rgba(255,255,255,.35);
+      padding:11px 22px;border-radius:4px;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+      text-decoration:none;
+      transition:background .2s;
+    }
+    .open-btn:hover{background:rgba(255,255,255,.2)}
+
+    /* Label badges per design */
+    .b1{background:rgba(200,190,170,.08);color:#888}
+    .b2{background:rgba(200,190,170,.08);color:#888}
+    .b3{background:rgba(255,45,120,.1);color:#FF2D78}
+    .b4{background:rgba(120,80,240,.12);color:#A080FF}
+    .b5{background:rgba(30,100,50,.15);color:#5A9A6A}
+    .b6{background:rgba(200,180,120,.1);color:#C0A060}
+    .b7{background:rgba(200,190,170,.08);color:#888}
+    .b8{background:rgba(120,80,240,.1);color:#A070CC}
+
+    .footer{text-align:center;margin-top:56px;font-size:10px;color:#2E2E2E;letter-spacing:.08em}
+  </style>
+</head>
+<body>
+  <div class="hd">
+    <p class="hd-eye">Design Preview · 유니원장 멀티링크</p>
+    <h1 class="hd-title">8가지 디자인 방향</h1>
+    <p class="hd-sub">마음에 드는 카드 위에 마우스를 올리면 전체 화면으로 볼 수 있어요</p>
+    <div class="hd-line"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="footer">© 2026 유니원장</div>
+
+  <script>
+    const designs = [
+      {num:'01', name:'Brutalist Grid',   file:'design1.html', badge:'b1', tag:'브루탈리즘'},
+      {num:'02', name:'Japanese Zen',     file:'design2.html', badge:'b2', tag:'일본 미니멀'},
+      {num:'03', name:'Neon City',        file:'design3.html', badge:'b3', tag:'네온 사이버'},
+      {num:'04', name:'Aurora Flow',      file:'design4.html', badge:'b4', tag:'오로라 글래스'},
+      {num:'05', name:'Luxury Spa',       file:'design5.html', badge:'b5', tag:'럭셔리 스파'},
+      {num:'06', name:'Retro Print',      file:'design6.html', badge:'b6', tag:'레트로 신문'},
+      {num:'07', name:'Split Screen',     file:'design7.html', badge:'b7', tag:'스플릿 스크린'},
+      {num:'08', name:'Soft 3D Bubble',   file:'design8.html', badge:'b8', tag:'소프트 버블'},
+    ];
+
+    const grid = document.getElementById('grid');
+
+    designs.forEach(d => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="label">
+          <span class="lbl-num">${d.num}</span>
+          <span class="lbl-name">${d.name}</span>
+          <span class="lbl-badge ${d.badge}">${d.tag}</span>
+        </div>
+        <div class="shell">
+          <iframe src="${d.file}" scrolling="no" title="${d.name}"></iframe>
+          <div class="overlay">
+            <a class="open-btn" href="${d.file}" target="_blank">전체 화면으로 보기 →</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    function scale() {
+      document.querySelectorAll('.shell').forEach(shell => {
+        const iframe = shell.querySelector('iframe');
+        const s = shell.offsetWidth / 420;
+        iframe.style.transform = `scale(${s})`;
+        shell.style.height = (900 * s) + 'px';
+      });
+    }
+    scale();
+    window.addEventListener('resize', scale);
+  </script>
+</body>
+</html>
